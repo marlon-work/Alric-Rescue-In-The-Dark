@@ -35,6 +35,10 @@ public class EnemyAI : MonoBehaviour
     private Vector2 startPosition;
     private float patrolDirection = 1f;
 
+    [Header("Sprite")]
+[Tooltip("Activa esto si el sprite base mira hacia la izquierda en lugar de la derecha.")]
+public bool flipSpriteByDefault = false;
+
     void Awake()
     {
         rb             = GetComponent<Rigidbody2D>();
@@ -130,11 +134,14 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void FlipSprite(float dirX)
+ void FlipSprite(float dirX)
+{
+    if (spriteRenderer != null)
     {
-        if (spriteRenderer != null)
-            spriteRenderer.flipX = dirX > 0f;
+        bool goingLeft = dirX < 0f;
+        spriteRenderer.flipX = flipSpriteByDefault ? goingLeft : !goingLeft;
     }
+}
 
     void OnCollisionEnter2D(Collision2D collision)
     {

@@ -460,6 +460,7 @@ MonoBehaviour:
   separationDistance: 0.25
   patrolRange: 3
   patrolSpeed: 1.5
+  flipSpriteByDefault: 0
 --- !u!212 &193512865
 SpriteRenderer:
   serializedVersion: 2
@@ -1278,6 +1279,7 @@ MonoBehaviour:
   separationDistance: 0.25
   patrolRange: 3
   patrolSpeed: 1.5
+  flipSpriteByDefault: 0
 --- !u!212 &473200080
 SpriteRenderer:
   serializedVersion: 2
@@ -2058,6 +2060,7 @@ MonoBehaviour:
   separationDistance: 0.25
   patrolRange: 3
   patrolSpeed: 1.5
+  flipSpriteByDefault: 1
 --- !u!212 &976041585
 SpriteRenderer:
   serializedVersion: 2
@@ -7580,6 +7583,7 @@ MonoBehaviour:
   separationDistance: 0.25
   patrolRange: 3
   patrolSpeed: 1.5
+  flipSpriteByDefault: 0
 --- !u!212 &1816944106
 SpriteRenderer:
   serializedVersion: 2
@@ -7790,6 +7794,7 @@ MonoBehaviour:
   separationDistance: 0.25
   patrolRange: 3
   patrolSpeed: 1.5
+  flipSpriteByDefault: 1
 --- !u!212 &1955684136
 SpriteRenderer:
   serializedVersion: 2
