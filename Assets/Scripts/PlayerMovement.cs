@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 // Controla el movimiento, salto y disparo del jugador usando el nuevo Input System
 [RequireComponent(typeof(Rigidbody2D))]
@@ -28,6 +29,10 @@ public class PlayerMovement : MonoBehaviour
     public string isRunningParam = "isRunning";
     [Tooltip("Umbral mínimo de input para considerar que el jugador está corriendo (evita ruido del joystick).")]
     public float runThreshold = 0.1f;
+
+    [Header("Eventos de sonido")]
+public UnityEvent onJump;   // Se invoca al saltar
+public UnityEvent onShoot;  // Se invoca al disparar
 
     [Header("Disparo")]
     [Tooltip("Prefab del proyectil de flecha (debe tener Rigidbody2D).")]
@@ -190,6 +195,8 @@ public class PlayerMovement : MonoBehaviour
         // Verificar si el jugador toca el suelo mediante un círculo de detección 2D
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundDistance, groundMask) != null;
 
+        if (animator != null) animator.SetBool("isJumping", !isGrounded);
+        
         // Aplicar velocidad horizontal solo si los controles están activos; durante el stun no se sobreescribe para que el knockback funcione
         if (controlsEnabled)
         {
@@ -204,6 +211,8 @@ public class PlayerMovement : MonoBehaviour
             Vector2 lv2 = rb.linearVelocity;
             lv2.y = jumpForce;
             rb.linearVelocity = lv2;
+
+            onJump?.Invoke();
         }
         jumpRequested = false;
     }
@@ -227,6 +236,7 @@ public class PlayerMovement : MonoBehaviour
     void Shoot()
     {
         Debug.Log("PlayerMovement: Shoot() llamado");
+        onShoot?.Invoke();
         if (arrowPrefab == null)
         {
             Debug.LogWarning("El prefab de flecha no está asignado en PlayerMovement.");

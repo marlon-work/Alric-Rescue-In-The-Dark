@@ -208,8 +208,11 @@ public class BossAI : MonoBehaviour
             Debug.LogWarning("BossAI: arrowSpawnPoint no está asignado ni se encontró un hijo ArrowSpawn/BulletSpawn/SpawnPoint.", this);
             return;
         }
-
+    
         lastShootTime = Time.time;
+
+         var soundController = GetComponent<BossSoundController>();
+    if (soundController != null) soundController.PlayShootSound();
 
         float direction = player.position.x > transform.position.x ? 1f : -1f;
 
